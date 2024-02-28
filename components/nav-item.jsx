@@ -10,7 +10,7 @@ export const NavItem = ({ name, active, href, icon: Icon }) => {
         active && "text-neutral-100"
       )}
     >
-      <Icon className="text-3xl" />
+      <Icon className="text-2xl" />
       <p>{name}</p>
     </Link>
   );
