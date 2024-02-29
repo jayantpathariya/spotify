@@ -14,7 +14,7 @@ const PlaylistPage = () => {
           width={250}
           height={250}
           alt="playlist poster"
-          className="w-64 h-60 rounded-md"
+          className="w-60 h-60 rounded-md"
         />
         <div className="self-end">
           <span className="text-neutral-200">Playlist</span>

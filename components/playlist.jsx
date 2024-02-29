@@ -21,7 +21,7 @@ export const Playlist = () => {
             {Array.from({ length: 10 }).map((_, i) => (
               <div
                 key={i}
-                className="embla__slide shrink-0 basis-[52%] md:basis-[33.2%] lg:basis-[24.3%] xl:basis-[19.3%] 2xl:basis-[13.6%]"
+                className="embla__slide shrink-0 basis-[52%] md:basis-[33.2%] lg:basis-[24.3%] xl:basis-[19.3%] 2xl:basis-[13.5%]"
               >
                 <PlaylistCard />
               </div>

@@ -50,7 +50,7 @@ export const Player = () => {
           <FiHeart className="text-lg" />
         </button>
       </div>
-      <div className="flex flex-col items-center gap-y-2 w-[40%]">
+      <div className="flex flex-col items-center gap-y-1 w-[40%]">
         <div className="flex items-center gap-x-5">
           <button className="hover:text-neutral-200 transition cursor-auto disabled:opacity-50 disabled:hover:text-neutral-400">
             <LuShuffle className="text-lg" />

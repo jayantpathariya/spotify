@@ -79,7 +79,7 @@ export const Table = () => {
       {playlist.map((track, index) => (
         <div
           key={track.id}
-          className="grid grid-cols-table items-center hover:bg-neutral-200/10 p-2 rounded-md group"
+          className="grid grid-cols-table items-center hover:bg-neutral-200/10 p-2 rounded-md group cursor-pointer"
         >
           <span className="justify-self-center group-hover:hidden">
             {index + 1}
