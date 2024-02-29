@@ -1,7 +1,10 @@
 import { Figtree } from "next/font/google";
 import { Sidebar } from "@/components/sidebar";
+import { Player } from "@/components/player";
 
 import "./globals.css";
+import { MobileNav } from "@/components/mobile-nav";
+import { MobilePlayer } from "@/components/mobile-player";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -21,8 +24,12 @@ export default function RootLayout({ children }) {
           </aside>
           <main className="col-span-5 row-span-9 lg:col-span-4">
             {children}
+            <MobilePlayer />
           </main>
-          <footer className="p-4 hidden lg:block">Player</footer>
+          <footer className="p-4 col-span-5">
+            <Player />
+            <MobileNav />
+          </footer>
         </div>
       </body>
     </html>

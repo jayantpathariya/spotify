@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 
 const SiteLayout = ({ children }) => {
   const [scrollY, setScrollY] = useState(0);
+  const [bgColor, setBgColor] = useState("bg-orange-800/30");
 
   const scrollYRef = useRef(null);
 
@@ -31,14 +32,18 @@ const SiteLayout = ({ children }) => {
   }, []);
 
   const color = useImageColor("/playlist.jpg");
-  const bgColor = color ? `from-[${color}]` : "from-orange-800/30";
+
+  useEffect(() => {
+    const bg = color ? `from-[${color}]` : "from-orange-800/30";
+    setBgColor(bg);
+  }, [color]);
 
   return (
     <Box className="h-full p-0 overflow-y-scroll" ref={scrollYRef}>
       <div
         className={cn(
-          "h-full bg-gradient-to-b from-orange-800/30 to-[20rem] relative",
-          color && bgColor
+          "h-full bg-gradient-to-b to-[20rem] relative",
+          bgColor && bgColor
         )}
       >
         <Header scrolled={scrollY > 80} color={color} />
