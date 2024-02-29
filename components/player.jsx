@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { FiHeart } from "react-icons/fi";
 import { LuShuffle, LuRepeat } from "react-icons/lu";
 import { GiNextButton, GiPreviousButton } from "react-icons/gi";
@@ -15,10 +17,13 @@ import {
 import { HiOutlineQueueList } from "react-icons/hi2";
 
 import { SeekBar } from "./seek-bar";
-import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export const Player = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -73,7 +78,13 @@ export const Player = () => {
         </div>
       </div>
       <div className="flex items-center gap-x-4">
-        <button className="hover:scale-105 hover:text-neutral-200 transition duration-200">
+        <button
+          className={cn(
+            "hover:scale-105 hover:text-neutral-200 transition duration-200",
+            pathname === "/queue" && "text-green-500"
+          )}
+          onClick={() => router.push("/queue")}
+        >
           <HiOutlineQueueList className="text-xl" />
         </button>
         <div className="flex gap-x-2">

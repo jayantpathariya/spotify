@@ -66,17 +66,19 @@ const playlist = [
   },
 ];
 
-export const Table = () => {
+export const Table = ({ startIndex = 1, showHeader = true }) => {
   return (
     <div role="table">
-      <div className="hidden md:grid grid-cols-table border-b border-neutral-600 mb-4 p-2 text-sm ">
-        <span className="justify-self-center">#</span>
-        <span>Title</span>
-        <span>Album</span>
-        <span className="justify-self-center">
-          <MdOutlineWatchLater />
-        </span>
-      </div>
+      {showHeader && (
+        <div className="hidden md:grid grid-cols-table border-b border-neutral-600 mb-4 p-2 text-sm ">
+          <span className="justify-self-center">#</span>
+          <span>Title</span>
+          <span>Album</span>
+          <span className="justify-self-center">
+            <MdOutlineWatchLater />
+          </span>
+        </div>
+      )}
       {playlist.map((track, index) => (
         <div
           key={track.id}
@@ -84,7 +86,7 @@ export const Table = () => {
         >
           <div className="hidden md:block">
             <span className="justify-self-center group-hover:hidden">
-              {index + 1}
+              {index + startIndex}
             </span>
             <RiPlayFill className="text-xl justify-self-center hidden group-hover:block" />
           </div>

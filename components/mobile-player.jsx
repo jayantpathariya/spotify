@@ -6,6 +6,7 @@ import { RiPlayFill } from "react-icons/ri";
 
 import { useImageColor } from "@/hooks/use-image-color";
 import { cn } from "@/lib/utils";
+import { MobileSeekBar } from "./mobile-seekbar";
 
 export const MobilePlayer = () => {
   const color = useImageColor("/playlist.jpg");
@@ -39,6 +40,7 @@ export const MobilePlayer = () => {
           <RiPlayFill className="text-3xl" />
         </button>
       </div>
+      <MobileSeekBar />
     </div>
   );
 };
