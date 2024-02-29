@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { GoHomeFill, GoSearch, GoPlus } from "react-icons/go";
@@ -189,10 +190,13 @@ export const Sidebar = () => {
           )}
         >
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-x-2 font-bold">
+            <Link
+              href="/your-library"
+              className="flex items-center gap-x-2 font-bold hover:text-neutral-200 transition duration-300"
+            >
               <TbPlaylist className="text-2xl" />
-              <span>You Library</span>
-            </div>
+              <span>Your Library</span>
+            </Link>
             <button className="hover:bg-neutral-900 hover:text-neutral-200 p-1 rounded-full transition duration-300">
               <GoPlus className="text-2xl" />
             </button>
@@ -233,7 +237,7 @@ export const Sidebar = () => {
               <IoIosList className="text-xl" />
             </button>
           </div>
-          <div className="mt-2">
+          <div className="mt-2 flex flex-col gap-y-2">
             {playlists.map((playlist) => (
               <SidebarPlaylist key={playlist.id} playlist={playlist} />
             ))}

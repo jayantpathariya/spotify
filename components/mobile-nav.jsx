@@ -1,22 +1,54 @@
+"use client";
+
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useMemo } from "react";
 import { GoHomeFill, GoSearch } from "react-icons/go";
 import { TbPlaylist } from "react-icons/tb";
 
 export const MobileNav = () => {
+  const pathname = usePathname();
+
+  const routes = useMemo(() => {
+    return [
+      {
+        name: "Home",
+        active:
+          !pathname.includes("/search") && !pathname.includes("/your-library"),
+        href: "/",
+        icon: GoHomeFill,
+      },
+      {
+        name: "Search",
+        active: pathname.includes("/search"),
+        href: "/search",
+        icon: GoSearch,
+      },
+      {
+        name: "Your Library",
+        active: pathname.includes("/your-library"),
+        href: "/your-library",
+        icon: TbPlaylist,
+      },
+    ];
+  }, [pathname]);
+
   return (
     <div className="flex items-center justify-between lg:hidden">
-      <Link href="/" className="flex flex-col items-center gap-y-1">
-        <GoHomeFill className="text-3xl" />
-        <span className="text-xs">Home</span>
-      </Link>
-      <Link href="/search" className="flex flex-col items-center gap-y-1">
-        <GoSearch className="text-3xl" />
-        <span className="text-xs">Search</span>
-      </Link>
-      <Link href="/" className="flex flex-col items-center gap-y-1">
-        <TbPlaylist className="text-3xl" />
-        <span className="text-xs"> Your Library</span>
-      </Link>
+      {routes.map((route) => (
+        <Link
+          key={route.name}
+          href={route.href}
+          className={cn(
+            "flex flex-col items-center gap-y-1",
+            route.active && "text-neutral-200"
+          )}
+        >
+          <route.icon className="text-3xl" />
+          <span className="text-xs">{route.name}</span>
+        </Link>
+      ))}
     </div>
   );
 };

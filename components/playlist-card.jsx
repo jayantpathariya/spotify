@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+
 import { PlayButton } from "./play-button";
 
 export const PlaylistCard = () => {
   return (
     <Link
-      href="/"
+      href="/playlist/1"
       className="p-4 inline-block bg-neutral-900 rounded-md hover:bg-neutral-800 transition duration-300 ease-in-out group"
     >
       <div className="relative">

@@ -32,22 +32,18 @@ const SiteLayout = ({ children }) => {
   }, []);
 
   const color = useImageColor("/playlist.jpg");
-
-  useEffect(() => {
-    const bg = color ? `from-[${color}]` : "from-orange-800/30";
-    setBgColor(bg);
-  }, [color]);
+  const bg = color ? `from-[${color}]` : "from-orange-800/30";
 
   return (
     <Box className="h-full p-0 overflow-y-scroll" ref={scrollYRef}>
       <div
         className={cn(
-          "h-full bg-gradient-to-b to-[20rem] relative",
-          bgColor && bgColor
+          "h-full bg-gradient-to-b to-[30rem] relative",
+          color && "from-[#514d70]"
         )}
       >
         <Header scrolled={scrollY > 80} color={color} />
-        <div className="p-4">{children}</div>
+        <div>{children}</div>
       </div>
     </Box>
   );

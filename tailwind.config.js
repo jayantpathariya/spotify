@@ -7,10 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      gridTemplateColumns: {
+        // [ index ] var(--tracklist-index-column-width, 16px) [ first ] minmax(120px, var(--col1, 4fr)) [ var1 ] minmax(120px, var(--col2, 2fr)) [ last ] minmax(120px, var(--col3, 1fr));
+        table: "34px minmax(120px, 4fr) minmax(120px, 2fr) minmax(60px, 1fr)",
       },
     },
   },

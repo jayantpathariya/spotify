@@ -3,7 +3,7 @@ import { Playlist } from "@/components/playlist";
 
 export default function Home() {
   return (
-    <div>
+    <div className="p-4">
       <div className="hidden lg:grid lg:grid-cols-2 xl:grid-cols-4 gap-4">
         <HorizontalPlaylist />
         <HorizontalPlaylist />

@@ -36,10 +36,10 @@ export const Player = () => {
         <div className="flex items-center gap-x-4">
           <Image
             src="/playlist.jpg"
-            width={58}
-            height={58}
+            width={50}
+            height={50}
             alt="song poster"
-            className="w-16 rounded-md"
+            className="w-14 rounded-md"
           />
           <div>
             <p className="font-bold text-neutral-200">Raat Bhar</p>
