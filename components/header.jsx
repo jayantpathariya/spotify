@@ -1,9 +1,19 @@
+"use client";
+
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
-export const Header = () => {
+export const Header = ({ scrolled, color }) => {
+  const bgColor = color ? `bg-[${color}]` : "bg-orange-800/30";
+
   return (
-    <header className="hidden sticky left-0 top-0 z-50 p-4 lg:flex items-center justify-between">
+    <header
+      className={cn(
+        "hidden sticky left-0 top-0 z-50 p-4 lg:flex items-center justify-between",
+        scrolled && bgColor
+      )}
+    >
       <div className="flex items-center gap-x-2">
         <button className="bg-neutral-900 w-8 h-8 p-2 rounded-full flex items-center justify-center">
           <BsChevronLeft className="text-lg" />
