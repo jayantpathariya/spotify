@@ -4,7 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 
 import { PlaylistCard } from "./playlist-card";
 
-export const Playlist = () => {
+export const Playlist = ({ title }) => {
   const [emblaRef] = useEmblaCarousel({
     slidesToScroll: "auto",
     containScroll: "trimSnaps",
@@ -12,9 +12,7 @@ export const Playlist = () => {
 
   return (
     <div className="mb-6 last:mb-0">
-      <h2 className="mb-2 text-2xl font-bold text-neutral-200">
-        Your top mixes
-      </h2>
+      <h2 className="mb-2 text-2xl font-bold text-neutral-200">{title}</h2>
       <div className="embla">
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container flex gap-x-4">

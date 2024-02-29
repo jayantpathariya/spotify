@@ -1,68 +1,87 @@
-import Image from "next/image";
 import { MdOutlineWatchLater } from "react-icons/md";
-import { RiPlayFill } from "react-icons/ri";
-import { PiDotsThreeVerticalBold } from "react-icons/pi";
+
+import TableItem from "./table-item";
 
 const playlist = [
   {
     id: 1,
     title: "Kesariya",
     album: "Brahmastra (Original Motion Picture Soundtrack)",
+    artists: "Pritam, Arijit Singh, Amitabh Bhattacharya",
     duration: "3:56",
+    image: "/playlist.jpg",
   },
   {
     id: 2,
-    title: "Kesariya",
-    album: "Brahmastra (Original Motion Picture Soundtrack)",
-    duration: "3:56",
+    title: "Apna Banale Le",
+    album: "Bhediya",
+    artists: "Sachin-Jigar, Arijit Singh, Amitabh Bhattacharya",
+    duration: "4:12",
+    image: "/playlist.jpg",
   },
   {
     id: 3,
-    title: "Kesariya",
-    album: "Brahmastra (Original Motion Picture Soundtrack)",
+    title: "Mann Bharryaa 2.0",
+    album: "Mann Bharryaa 2.0",
+    artists: "B Praak, Jaani",
     duration: "3:56",
+    image: "/playlist.jpg",
   },
   {
     id: 4,
     title: "Kesariya",
     album: "Brahmastra (Original Motion Picture Soundtrack)",
+    artists: "Pritam, Arijit Singh, Amitabh Bhattacharya",
     duration: "3:56",
+    image: "/playlist.jpg",
   },
   {
     id: 5,
-    title: "Kesariya",
-    album: "Brahmastra (Original Motion Picture Soundtrack)",
-    duration: "3:56",
+    title: "Apna Banale Le",
+    album: "Bhediya",
+    artists: "Sachin-Jigar, Arijit Singh, Amitabh Bhattacharya",
+    duration: "4:12",
+    image: "/playlist.jpg",
   },
   {
     id: 6,
-    title: "Kesariya",
-    album: "Brahmastra (Original Motion Picture Soundtrack)",
+    title: "Mann Bharryaa 2.0",
+    album: "Mann Bharryaa 2.0",
+    artists: "B Praak, Jaani",
     duration: "3:56",
+    image: "/playlist.jpg",
   },
   {
     id: 7,
     title: "Kesariya",
     album: "Brahmastra (Original Motion Picture Soundtrack)",
+    artists: "Pritam, Arijit Singh, Amitabh Bhattacharya",
     duration: "3:56",
+    image: "/playlist.jpg",
   },
   {
     id: 8,
-    title: "Kesariya",
-    album: "Brahmastra (Original Motion Picture Soundtrack)",
-    duration: "3:56",
+    title: "Apna Banale Le",
+    album: "Bhediya",
+    artists: "Sachin-Jigar, Arijit Singh, Amitabh Bhattacharya",
+    duration: "4:12",
+    image: "/playlist.jpg",
   },
   {
     id: 9,
-    title: "Kesariya",
-    album: "Brahmastra (Original Motion Picture Soundtrack)",
+    title: "Mann Bharryaa 2.0",
+    album: "Mann Bharryaa 2.0",
+    artists: "B Praak, Jaani",
     duration: "3:56",
+    image: "/playlist.jpg",
   },
   {
     id: 10,
     title: "Kesariya",
     album: "Brahmastra (Original Motion Picture Soundtrack)",
+    artists: "Pritam, Arijit Singh, Amitabh Bhattacharya",
     duration: "3:56",
+    image: "/playlist.jpg",
   },
 ];
 
@@ -80,43 +99,16 @@ export const Table = ({ startIndex = 1, showHeader = true }) => {
         </div>
       )}
       {playlist.map((track, index) => (
-        <div
+        <TableItem
           key={track.id}
-          className="flex justify-between md:grid grid-cols-table items-center hover:bg-neutral-200/10 p-2 md:rounded-md group cursor-pointer"
-        >
-          <div className="hidden md:block">
-            <span className="justify-self-center group-hover:hidden">
-              {index + startIndex}
-            </span>
-            <RiPlayFill className="text-xl justify-self-center hidden group-hover:block" />
-          </div>
-          <div className="flex items-center gap-x-2">
-            <Image
-              src="/playlist.jpg"
-              width={50}
-              height={50}
-              alt="playlist poster"
-              className="w-11 h-11 rounded-md"
-            />
-            <div>
-              <p className="text-neutral-200">Kesariya</p>
-              <p className="text-sm line-clamp-1">
-                Pritam, Arijit Singh, Amitabh Bhattacharya
-              </p>
-            </div>
-          </div>
-          <div className="hidden md:block">
-            <p className="text-sm line-clamp-1">
-              Brahmastra (Original Motion Picture Soundtrack)
-            </p>
-          </div>
-          <div className="justify-self-center hidden md:block">
-            <span>3:56</span>
-          </div>
-          <button className="md:hidden">
-            <PiDotsThreeVerticalBold className="text-2xl" />
-          </button>
-        </div>
+          index={index}
+          startIndex={startIndex}
+          title={track.title}
+          duration={track.duration}
+          album={track.album}
+          image={track.image}
+          artists={track.artists}
+        />
       ))}
     </div>
   );

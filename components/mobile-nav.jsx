@@ -46,7 +46,9 @@ export const MobileNav = () => {
           )}
         >
           <route.icon className="text-3xl" />
-          <span className="text-xs">{route.name}</span>
+          <span className={cn("text-xs", route.active && "font-bold")}>
+            {route.name}
+          </span>
         </Link>
       ))}
     </div>
