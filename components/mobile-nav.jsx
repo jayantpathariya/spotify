@@ -35,7 +35,7 @@ export const MobileNav = () => {
   }, [pathname]);
 
   return (
-    <div className="flex items-center justify-between lg:hidden">
+    <div className="flex w-full items-center justify-between lg:hidden p-2">
       {routes.map((route) => (
         <Link
           key={route.name}

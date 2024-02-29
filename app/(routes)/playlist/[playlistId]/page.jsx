@@ -4,31 +4,43 @@ import { PiDotsThreeBold } from "react-icons/pi";
 
 import { PlayButton } from "@/components/play-button";
 import { Table } from "@/components/table";
+import { BackButton } from "@/components/back-button";
 
 const PlaylistPage = () => {
   return (
     <div>
-      <div className="flex gap-x-4 p-4">
+      <div className="sticky top-0">
+        <BackButton />
+      </div>
+      <div className="flex flex-col items-center justify-center md:flex-row gap-x-4 p-4">
         <Image
           src="/playlist.jpg"
           width={250}
           height={250}
           alt="playlist poster"
-          className="w-60 h-60 rounded-md"
+          className="w-48 md:w-60 rounded-md"
         />
-        <div className="self-end">
-          <span className="text-neutral-200">Playlist</span>
-          <h1 className="text-8xl font-extrabold text-neutral-200 mb-2">
+        <div className="self-start md:self-end mt-2 md:mt-0">
+          <span className="text-neutral-200 hidden md:inline-block">
+            Playlist
+          </span>
+          <h1 className="text-xl md:text-6xl lg:text-8xl font-extrabold text-neutral-200 mb-2 line-clamp-1">
             Daily mix 1
           </h1>
-          <p className="font-semibold">
+          <p className="font-semibold text-sm md:text-base line-clamp-1 mb-1">
             Pritam, Rishi Kumar, Vishal-Shekhar and more
           </p>
-          <p>Spotify · 2021 · 50 songs · 3 hr 30 min</p>
+          <p className="text-sm md:text-base flex md:block flex-col gap-y-1">
+            <span className="text-neutral-200">Spotify </span>
+            <span className="text-neutral-200 hidden md:inline-block">
+              50 songs
+            </span>
+            <span> 3 hr 30 min</span>
+          </p>
         </div>
       </div>
-      <div className="mt-6 bg-gradient-to-b from-[#514d70]/40 to-[20rem] p-4">
-        <div className="flex gap-x-6 items-center">
+      <div className="md:mt-6 bg-gradient-to-b from-[#514d70]/40 to-[20rem] md:p-4">
+        <div className="hidden md:flex gap-x-6 items-center">
           <PlayButton size="lg" />
           <button>
             <FiHeart className="text-4xl" />
@@ -37,7 +49,7 @@ const PlaylistPage = () => {
             <PiDotsThreeBold className="text-4xl" />
           </button>
         </div>
-        <div className="mt-6 p-2">
+        <div className="md:mt-6 md:p-2 pt-2">
           <Table />
         </div>
       </div>

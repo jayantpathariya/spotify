@@ -38,12 +38,12 @@ const SiteLayout = ({ children }) => {
     <Box className="h-full p-0 overflow-y-scroll" ref={scrollYRef}>
       <div
         className={cn(
-          "h-full bg-gradient-to-b to-[30rem] relative",
+          "h-full md:bg-gradient-to-b to-[30rem] relative",
           color && "from-[#514d70]"
         )}
       >
         <Header scrolled={scrollY > 80} color={color} />
-        <div>{children}</div>
+        <div className="pb-16 lg:pb-0">{children}</div>
       </div>
     </Box>
   );

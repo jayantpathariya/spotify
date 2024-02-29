@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { RiPlayFill } from "react-icons/ri";
+import { PiDotsThreeVerticalBold } from "react-icons/pi";
 
 const playlist = [
   {
@@ -68,7 +69,7 @@ const playlist = [
 export const Table = () => {
   return (
     <div role="table">
-      <div className="grid grid-cols-table border-b border-neutral-600 mb-4 p-2 text-sm ">
+      <div className="hidden md:grid grid-cols-table border-b border-neutral-600 mb-4 p-2 text-sm ">
         <span className="justify-self-center">#</span>
         <span>Title</span>
         <span>Album</span>
@@ -79,12 +80,14 @@ export const Table = () => {
       {playlist.map((track, index) => (
         <div
           key={track.id}
-          className="grid grid-cols-table items-center hover:bg-neutral-200/10 p-2 rounded-md group cursor-pointer"
+          className="flex justify-between md:grid grid-cols-table items-center hover:bg-neutral-200/10 p-2 md:rounded-md group cursor-pointer"
         >
-          <span className="justify-self-center group-hover:hidden">
-            {index + 1}
-          </span>
-          <RiPlayFill className="text-xl justify-self-center hidden group-hover:block" />
+          <div className="hidden md:block">
+            <span className="justify-self-center group-hover:hidden">
+              {index + 1}
+            </span>
+            <RiPlayFill className="text-xl justify-self-center hidden group-hover:block" />
+          </div>
           <div className="flex items-center gap-x-2">
             <Image
               src="/playlist.jpg"
@@ -100,14 +103,17 @@ export const Table = () => {
               </p>
             </div>
           </div>
-          <div>
+          <div className="hidden md:block">
             <p className="text-sm line-clamp-1">
               Brahmastra (Original Motion Picture Soundtrack)
             </p>
           </div>
-          <div className="justify-self-center">
+          <div className="justify-self-center hidden md:block">
             <span>3:56</span>
           </div>
+          <button className="md:hidden">
+            <PiDotsThreeVerticalBold className="text-2xl" />
+          </button>
         </div>
       ))}
     </div>

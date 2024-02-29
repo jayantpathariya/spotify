@@ -7,7 +7,7 @@ export const PlaylistCard = () => {
   return (
     <Link
       href="/playlist/1"
-      className="p-4 inline-block bg-neutral-900 rounded-md hover:bg-neutral-800 transition duration-300 ease-in-out group"
+      className="lg:p-4 inline-block lg:bg-neutral-900 rounded-md lg:hover:bg-neutral-800 transition duration-300 ease-in-out group"
     >
       <div className="relative">
         <Image
@@ -26,7 +26,7 @@ export const PlaylistCard = () => {
         <p className="text-neutral-200 font-bold line-clamp-1 mb-1">
           Playlist 1
         </p>
-        <p className="text-sm line-clamp-2">
+        <p className="text-sm line-clamp-2 hidden lg:block">
           Pritam, Rishi Kumar, Vishal-Shekhar and more
         </p>
       </div>

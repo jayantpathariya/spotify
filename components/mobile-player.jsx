@@ -14,7 +14,7 @@ export const MobilePlayer = () => {
   return (
     <div
       className={cn(
-        "sticky bottom-[10.2%] left-1 w-[96%] rounded-md p-2 flex items-center justify-between gap-x-2 m-2 lg:hidden",
+        "sticky bottom-[10.2%] left-0 right-0 rounded-md p-2 flex items-center justify-between gap-x-2 m-2 lg:hidden",
         bgColor && "bg-[#514d70]"
       )}
     >

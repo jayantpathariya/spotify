@@ -19,10 +19,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={font.className}>
         <div className="grid grid-cols-8 grid-rows-10 gap-x-2 text-neutral-400 h-full">
-          <aside className="row-span-9 col-span-2 hidden lg:block p-2 pr-0">
+          <aside className="row-span-9 col-span-2 hidden lg:block lg:p-2 pr-0">
             <Sidebar />
           </aside>
-          <main className="col-span-8 row-span-9 lg:col-span-6 p-2 pl-0">
+          <main className="col-span-8 row-span-9 lg:col-span-6 lg:p-2 pl-0">
             {children}
             <MobilePlayer />
           </main>
