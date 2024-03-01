@@ -1,9 +1,10 @@
 import Image from "next/image";
+
 import { PlayButton } from "./play-button";
 
 export const TopResultCard = () => {
   return (
-    <div className="bg-neutral-900 p-4 rounded-md cursor-pointer relative group">
+    <div className="bg-neutral-900 p-4 rounded-md hover:bg-neutral-800/80 cursor-pointer relative group transition duration-300">
       <Image
         src="/playlist.jpg"
         alt="song poster"

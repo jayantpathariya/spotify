@@ -18,10 +18,10 @@ export default function Home() {
         <HorizontalPlaylist />
       </div>
       <div className="mt-8 mr-7">
-        <Playlist />
-        <Playlist />
-        <Playlist />
-        <Playlist />
+        <Playlist title="Today's biggest hits" />
+        <Playlist title="Your top mixes" />
+        <Playlist title="India's Best" />
+        <Playlist title="Recently played" />
       </div>
     </div>
   );

@@ -26,9 +26,11 @@ export const PlaylistCard = () => {
         <p className="text-neutral-200 font-bold line-clamp-1 mb-1">
           Playlist 1
         </p>
-        <p className="text-sm line-clamp-2 hidden lg:block">
-          Pritam, Rishi Kumar, Vishal-Shekhar and more
-        </p>
+        <div className="hidden lg:inline-block">
+          <p className="text-sm line-clamp-2">
+            Pritam, Rishi Kumar, Vishal-Shekhar and more
+          </p>
+        </div>
       </div>
     </Link>
   );

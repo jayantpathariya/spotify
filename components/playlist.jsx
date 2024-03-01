@@ -11,7 +11,7 @@ export const Playlist = ({ title }) => {
   });
 
   return (
-    <div className="mb-6 last:mb-0">
+    <div className="mb-8 last:mb-0">
       <h2 className="mb-2 text-2xl font-bold text-neutral-200">{title}</h2>
       <div className="embla">
         <div className="embla__viewport" ref={emblaRef}>
