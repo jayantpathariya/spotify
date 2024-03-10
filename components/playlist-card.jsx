@@ -3,10 +3,10 @@ import Image from "next/image";
 
 import { PlayButton } from "./play-button";
 
-export const PlaylistCard = ({ title, images }) => {
+export const PlaylistCard = ({ title, images, type, link }) => {
   return (
     <Link
-      href="/playlist/1"
+      href={`/${type}/${link}`}
       className="lg:p-4 inline-block lg:bg-neutral-900 rounded-md lg:hover:bg-neutral-800 transition duration-300 ease-in-out group"
     >
       <div className="relative">

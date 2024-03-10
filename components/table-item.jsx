@@ -2,6 +2,8 @@ import Image from "next/image";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { RiPlayFill } from "react-icons/ri";
 
+import { secondsToMinutes } from "@/lib/utils";
+
 const TableItem = ({
   index,
   startIndex,
@@ -28,7 +30,12 @@ const TableItem = ({
           className="w-11 h-11 rounded-md"
         />
         <div>
-          <p className="text-neutral-200">{title}</p>
+          <p
+            className="text-neutral-200 line-clamp-1"
+            dangerouslySetInnerHTML={{
+              __html: title,
+            }}
+          />
           <p className="text-sm line-clamp-1">{artists}</p>
         </div>
       </div>
@@ -36,7 +43,7 @@ const TableItem = ({
         <p className="text-sm line-clamp-1">{album}</p>
       </div>
       <div className="justify-self-center hidden md:block">
-        <span>{duration}</span>
+        <span>{secondsToMinutes(duration)}</span>
       </div>
       <button className="md:hidden">
         <PiDotsThreeVerticalBold className="text-2xl" />
