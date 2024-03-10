@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { PlayButton } from "./play-button";
 
-export const PlaylistCard = () => {
+export const PlaylistCard = ({ title, images }) => {
   return (
     <Link
       href="/playlist/1"
@@ -11,11 +11,11 @@ export const PlaylistCard = () => {
     >
       <div className="relative">
         <Image
-          src="/playlist.jpg"
+          src={images[2].link}
           width={180}
           height={180}
-          alt="playlist poster"
-          className="w-full rounded-md"
+          alt={`${title} playlist cover`}
+          className="w-full rounded-md mb-3"
         />
         <PlayButton
           className="absolute bottom-2 right-2 translate-y-2 opacity-0  group-hover:opacity-100 transition duration-300 group-hover:translate-y-0"
@@ -23,9 +23,7 @@ export const PlaylistCard = () => {
         />
       </div>
       <div className="mt-3">
-        <p className="text-neutral-200 font-bold line-clamp-1 mb-1">
-          Playlist 1
-        </p>
+        <p className="text-neutral-200 font-bold line-clamp-1 mb-1">{title}</p>
         <div className="hidden lg:inline-block">
           <p className="text-sm line-clamp-2">
             Pritam, Rishi Kumar, Vishal-Shekhar and more

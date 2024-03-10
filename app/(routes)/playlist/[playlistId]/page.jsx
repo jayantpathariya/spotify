@@ -12,7 +12,7 @@ const PlaylistPage = () => {
       <div className="sticky top-0">
         <BackButton />
       </div>
-      <div className="flex flex-col items-center justify-center md:flex-row gap-x-4 p-4">
+      <div className="flex flex-col items-center justify-center lg:justify-start md:flex-row gap-x-4 p-4">
         <Image
           src="/playlist.jpg"
           width={250}

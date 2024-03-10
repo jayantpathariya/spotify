@@ -4,7 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 
 import { PlaylistCard } from "./playlist-card";
 
-export const Playlist = ({ title }) => {
+export const Playlist = ({ title, playlist, source }) => {
   const [emblaRef] = useEmblaCarousel({
     slidesToScroll: "auto",
     containScroll: "trimSnaps",
@@ -16,12 +16,18 @@ export const Playlist = ({ title }) => {
       <div className="embla">
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container flex gap-x-4">
-            {Array.from({ length: 10 }).map((_, i) => (
+            {playlist?.map((item) => (
               <div
-                key={i}
-                className="embla__slide shrink-0 basis-[53%] md:basis-[33.2%] lg:basis-[24.3%] xl:basis-[19.3%] 2xl:basis-[13.5%]"
+                key={item.id}
+                className="embla__slide shrink-0 basis-[53%] md:basis-[33.2%] lg:basis-[24.3%] xl:basis-[19.3%] 2xl:basis-[14.3%]"
               >
-                <PlaylistCard />
+                <PlaylistCard
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  images={item.images}
+                  type={item.type}
+                  link={item.link}
+                />
               </div>
             ))}
           </div>

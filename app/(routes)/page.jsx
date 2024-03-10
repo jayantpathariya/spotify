@@ -1,7 +1,14 @@
+import { getHomeData } from "@/actions/get-home-data";
 import { HorizontalPlaylist } from "@/components/horizontal-playlist";
 import { Playlist } from "@/components/playlist";
 
-export default function Home() {
+export default async function Home() {
+  const result = await getHomeData();
+
+  const sortedResults = Object?.values(result?.modules)?.sort(
+    (a, b) => a.position - b.position
+  );
+
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold text-neutral-200 lg:hidden">
@@ -18,10 +25,14 @@ export default function Home() {
         <HorizontalPlaylist />
       </div>
       <div className="mt-8 mr-7">
-        <Playlist title="Today's biggest hits" />
-        <Playlist title="Your top mixes" />
-        <Playlist title="India's Best" />
-        <Playlist title="Recently played" />
+        {sortedResults.map((item) => (
+          <Playlist
+            key={item.source}
+            title={item.title}
+            playlist={result[item.source]}
+            source={item.source}
+          />
+        ))}
       </div>
     </div>
   );
