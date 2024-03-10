@@ -1,7 +1,6 @@
 import { MdOutlineWatchLater } from "react-icons/md";
 
 import TableItem from "./table-item";
-import { formatArtists } from "@/lib/utils";
 
 export const Table = ({ startIndex = 1, showHeader = true, playlist }) => {
   return (
@@ -21,13 +20,8 @@ export const Table = ({ startIndex = 1, showHeader = true, playlist }) => {
           key={track.id}
           index={index}
           startIndex={startIndex}
-          title={track?.title}
-          duration={track?.more_info?.duration}
-          album={track?.more_info.album}
-          image={track?.image}
-          artists={
-            track?.subtitle || formatArtists(track?.more_info?.artistMap)
-          }
+          track={track}
+          playlist={playlist}
         />
       ))}
     </div>

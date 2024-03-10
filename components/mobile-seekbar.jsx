@@ -5,9 +5,9 @@ import * as Slider from "@radix-ui/react-slider";
 
 export const MobileSeekBar = ({
   defaultValue = 0,
+  value,
   max = 100,
   step = 1,
-  onChange,
   className,
 }) => {
   return (
@@ -18,9 +18,9 @@ export const MobileSeekBar = ({
           className
         )}
         defaultValue={[defaultValue]}
+        value={[value]}
         max={max}
         step={step}
-        onChange={onChange}
         disabled
       >
         <Slider.Track className="bg-neutral-800 relative grow rounded-full h-[3px]">

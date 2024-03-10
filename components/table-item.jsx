@@ -1,20 +1,32 @@
+"use client";
+
 import Image from "next/image";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { RiPlayFill } from "react-icons/ri";
+import { useDispatch } from "react-redux";
 
-import { secondsToMinutes } from "@/lib/utils";
+import { formatArtists, secondsToMinutes } from "@/lib/utils";
+import { setSong } from "@/redux/songSlice";
 
-const TableItem = ({
-  index,
-  startIndex,
-  image,
-  title,
-  artists,
-  album,
-  duration,
-}) => {
+const TableItem = ({ index, startIndex, track, playlist }) => {
+  const dispatch = useDispatch();
+
+  const handleSetSong = () => {
+    dispatch(
+      setSong({
+        song: track,
+        index: index,
+        playlist: playlist,
+        playlistName: "My Playlist",
+      })
+    );
+  };
+
   return (
-    <div className="flex justify-between md:grid grid-cols-table items-center hover:bg-neutral-200/10 p-2 md:rounded-md group cursor-pointer">
+    <div
+      className="flex justify-between md:grid grid-cols-table items-center hover:bg-neutral-200/10 p-2 md:rounded-md group cursor-pointer"
+      onClick={handleSetSong}
+    >
       <div className="hidden md:block">
         <span className="justify-self-center group-hover:hidden">
           {index + startIndex}
@@ -23,7 +35,7 @@ const TableItem = ({
       </div>
       <div className="flex items-center gap-x-2">
         <Image
-          src={image}
+          src={track?.image}
           width={50}
           height={50}
           alt="playlist poster"
@@ -33,17 +45,23 @@ const TableItem = ({
           <p
             className="text-neutral-200 line-clamp-1"
             dangerouslySetInnerHTML={{
-              __html: title,
+              __html: track?.title,
             }}
           />
-          <p className="text-sm line-clamp-1">{artists}</p>
+          <p
+            className="text-sm line-clamp-1"
+            dangerouslySetInnerHTML={{
+              __html:
+                track?.subtitle || formatArtists(track?.more_info?.artistMap),
+            }}
+          />
         </div>
       </div>
       <div className="hidden md:block">
-        <p className="text-sm line-clamp-1">{album}</p>
+        <p className="text-sm line-clamp-1">{track?.more_info?.album}</p>
       </div>
       <div className="justify-self-center hidden md:block">
-        <span>{secondsToMinutes(duration)}</span>
+        <span>{secondsToMinutes(track?.more_info?.duration)}</span>
       </div>
       <button className="md:hidden">
         <PiDotsThreeVerticalBold className="text-2xl" />
