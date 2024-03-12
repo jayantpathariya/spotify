@@ -52,11 +52,9 @@ export const Player = () => {
     }
   };
 
-  console.log(currentSong);
-
   return (
     <div className="w-full items-center justify-between hidden lg:flex">
-      <div className="flex items-center gap-x-4 w-1/4">
+      <div className="flex items-center gap-x-4 w-1/6">
         <div className="flex items-center gap-x-4">
           <Image
             src={currentSong?.image}

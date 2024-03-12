@@ -5,18 +5,20 @@ import { FiHeart } from "react-icons/fi";
 import { RiPlayFill } from "react-icons/ri";
 import { MdOutlinePause } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 import { useImageColor } from "@/hooks/use-image-color";
 import { cn } from "@/lib/utils";
 import { MobileSeekBar } from "./mobile-seekbar";
 import { usePlayer } from "@/hooks/use-player";
+import { PlayerModal } from "./player-modal";
 
 export const MobilePlayer = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const { currentSong } = useSelector((state) => state.song);
 
   const color = useImageColor(currentSong?.image);
-  const bgColor = `${color}E6`;
-  // if bgColor is too light, use a darker color
+  const bgColor = color ? `${color}E6` : "#000";
   const getTextColor = (color) => {
     const r = parseInt(color.slice(1, 3), 16);
     const g = parseInt(color.slice(3, 5), 16);
@@ -38,6 +40,7 @@ export const MobilePlayer = () => {
       style={{
         backgroundColor: bgColor,
       }}
+      onClick={() => setIsOpen(true)}
     >
       <div className="flex items-center gap-x-2">
         <Image
@@ -81,6 +84,7 @@ export const MobilePlayer = () => {
         </button>
       </div>
       <MobileSeekBar value={seek} max={duration} />
+      <PlayerModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };
