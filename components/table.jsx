@@ -15,7 +15,7 @@ export const Table = ({ startIndex = 1, showHeader = true, playlist }) => {
           </span>
         </div>
       )}
-      {playlist.map((track, index) => (
+      {playlist?.map((track, index) => (
         <TableItem
           key={track.id}
           index={index}

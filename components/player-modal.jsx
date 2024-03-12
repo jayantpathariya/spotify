@@ -18,7 +18,6 @@ import { useImageColor } from "@/hooks/use-image-color";
 
 export const PlayerModal = ({ isOpen, setIsOpen }) => {
   const { currentSong, songs, index } = useSelector((state) => state.song);
-  console.log(songs, index);
 
   const color = useImageColor(currentSong?.image);
 
