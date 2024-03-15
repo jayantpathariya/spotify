@@ -1,15 +1,42 @@
+"use client";
+
 import Image from "next/image";
+import axios from "axios";
 import { FiHeart } from "react-icons/fi";
 import { PiDotsThreeBold } from "react-icons/pi";
 import { RiPlayFill } from "react-icons/ri";
+import { useDispatch } from "react-redux";
+
+import { setSong } from "@/redux/songSlice";
 
 export const ResultSongs = ({ playlist }) => {
+  const dispatch = useDispatch();
+
+  const handlePlaySong = async (id) => {
+    try {
+      const result = await axios(`/api/songs/${id}`);
+      const data = result.data;
+
+      dispatch(
+        setSong({
+          playlist: [],
+          song: data[0],
+          index: 0,
+          playlistName: data.title,
+        })
+      );
+    } catch (error) {
+      console.log("[PLAY_SONG]", error);
+    }
+  };
+
   return (
     <div className="flex flex-col">
-      {playlist.map((song) => (
+      {playlist?.map((song) => (
         <div
           className="flex items-center gap-x-2 justify-between hover:bg-neutral-200/10 p-2 rounded-md group"
           key={song.id}
+          onClick={() => handlePlaySong(song.id)}
         >
           <div className="flex items-center gap-x-2">
             <div className="relative">

@@ -30,8 +30,6 @@ export const MobilePlayer = () => {
 
   const { isPlaying, seek, duration, handleTogglePlay } = usePlayer();
 
-  console.log("color", color);
-
   return (
     <div
       className={cn(

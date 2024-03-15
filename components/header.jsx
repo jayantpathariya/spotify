@@ -11,13 +11,17 @@ import { cn } from "@/lib/utils";
 import { useDebounce } from "@/hooks/use-debounce";
 
 export const Header = ({ scrolled, color }) => {
-  const [value, setValue] = useState("");
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const query = pathname?.split("/")[2]
+    ? pathname?.split("/")[2]?.replaceAll("%20", " ")
+    : "";
+
+  const [value, setValue] = useState(query);
   const bgColor = color ? `bg-[${color}]` : "bg-orange-800/30";
 
   const debouncedValue = useDebounce(value);
-
-  const pathname = usePathname();
-  const router = useRouter();
 
   const handleSearch = (e) => {
     setValue(e.target.value);
@@ -26,10 +30,10 @@ export const Header = ({ scrolled, color }) => {
   useEffect(() => {
     if (debouncedValue) {
       router.push(`/search/${debouncedValue}`);
-    } else {
+    } else if (pathname.includes("/search")) {
       router.push("/search");
     }
-  }, [debouncedValue, router]);
+  }, [debouncedValue, router, pathname]);
 
   return (
     <header

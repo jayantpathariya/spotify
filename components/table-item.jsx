@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import Image from "next/image";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { RiPlayFill } from "react-icons/ri";
@@ -13,15 +14,29 @@ const TableItem = ({ index, startIndex, track, playlist }) => {
 
   const dispatch = useDispatch();
 
-  const handleSetSong = () => {
-    dispatch(
-      setSong({
-        song: track,
-        index: index,
-        playlist: playlist,
-        playlistName: "My Playlist",
-      })
-    );
+  const handleSetSong = async () => {
+    if (!track?.download_links) {
+      const result = await axios(`/api/songs/${track?.id}`);
+      const data = result.data;
+
+      dispatch(
+        setSong({
+          playlist: [],
+          song: data[0],
+          index: 0,
+          playlistName: data.title,
+        })
+      );
+    } else {
+      dispatch(
+        setSong({
+          song: track,
+          index: index,
+          playlist: playlist,
+          playlistName: "My Playlist",
+        })
+      );
+    }
   };
 
   return (

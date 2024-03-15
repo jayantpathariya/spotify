@@ -130,7 +130,7 @@ export const PlayerModal = ({ isOpen, setIsOpen }) => {
                     onClick={handleNextSong}
                     className={cn(
                       "text-neutral-200",
-                      index === songs.length - 1 &&
+                      index === songs?.length - 1 &&
                         "pointer-events-none text-neutral-400"
                     )}
                   >

@@ -21,6 +21,7 @@ const SearchPage = () => {
           placeholder="What do you want to listen to?"
           className="w-full outline-none py-2 px-4 pl-10 text-neutral-800 placeholder:text-neutral-800 rounded-md"
           value={value}
+          autoFocus
           onChange={(e) => {
             setValue(e.target.value);
             router.push(`/search/${e.target.value}`);
