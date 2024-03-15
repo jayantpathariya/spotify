@@ -32,6 +32,11 @@ export const PlayerModal = ({ isOpen, setIsOpen }) => {
     handleShuffleSongs,
   } = usePlayer();
 
+  const onClose = (e) => {
+    e.stopPropagation();
+    setIsOpen(false);
+  };
+
   return (
     <Sheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <Sheet.Container>
@@ -41,7 +46,7 @@ export const PlayerModal = ({ isOpen, setIsOpen }) => {
           }}
         >
           <Sheet.Header className="py-5 px-4 flex items-center justify-between">
-            <button onClick={() => setIsOpen(false)}>
+            <button onClick={onClose}>
               <IoChevronDownOutline className="text-2xl text-neutral-200" />
             </button>
             <button>
