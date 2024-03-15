@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
 import { usePathname, useRouter } from "next/navigation";
@@ -24,6 +25,8 @@ export const Header = ({ scrolled, color }) => {
     setValue(e.target.value);
     router.push(`/search/${e.target.value}`);
   };
+
+  const isAuth = false;
 
   return (
     <header
@@ -63,15 +66,32 @@ export const Header = ({ scrolled, color }) => {
           />
         </div>
       </div>
-      <div className="p-1 bg-neutral-900 rounded-full">
-        <Image
-          src="/profile-image.jpg"
-          width={26}
-          height={26}
-          alt="profile image"
-          className="rounded-full h-7 w-7"
-        />
-      </div>
+      {isAuth ? (
+        <Link href="/login" className="p-1 bg-neutral-900 rounded-full">
+          <Image
+            src="/profile-image.jpg"
+            width={26}
+            height={26}
+            alt="profile image"
+            className="rounded-full h-7 w-7"
+          />
+        </Link>
+      ) : (
+        <div className="flex items-center gap-x-2">
+          <Link
+            href="/signup"
+            className="px-4 py-2 font-bold hover:scale-105 hover:text-neutral-200 transition-transform"
+          >
+            Sign up
+          </Link>
+          <Link
+            href="/login"
+            className="px-4 py-2 bg-neutral-200 text-neutral-700 rounded-full font-bold hover:scale-105 transition-transform"
+          >
+            Login
+          </Link>
+        </div>
+      )}
     </header>
   );
 };
