@@ -8,7 +8,6 @@ import { GoSearch } from "react-icons/go";
 import { usePathname, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import { useDebounce } from "@/hooks/use-debounce";
 
 export const Header = ({ scrolled, color }) => {
   const pathname = usePathname();
@@ -21,19 +20,10 @@ export const Header = ({ scrolled, color }) => {
   const [value, setValue] = useState(query);
   const bgColor = color ? `bg-[${color}]` : "bg-orange-800/30";
 
-  const debouncedValue = useDebounce(value);
-
   const handleSearch = (e) => {
     setValue(e.target.value);
+    router.push(`/search/${e.target.value}`);
   };
-
-  useEffect(() => {
-    if (debouncedValue) {
-      router.push(`/search/${debouncedValue}`);
-    } else if (pathname.includes("/search")) {
-      router.push("/search");
-    }
-  }, [debouncedValue, router, pathname]);
 
   return (
     <header

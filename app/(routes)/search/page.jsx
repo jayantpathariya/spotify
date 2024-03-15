@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { GoSearch } from "react-icons/go";
 
 import { BrowseCard } from "@/components/browse-card";
@@ -10,6 +10,11 @@ const SearchPage = () => {
   const [value, setValue] = useState("");
 
   const router = useRouter();
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    router.push(`/search/${e.target.value}`);
+  };
 
   return (
     <div className="p-4">
@@ -22,10 +27,7 @@ const SearchPage = () => {
           className="w-full outline-none py-2 px-4 pl-10 text-neutral-800 placeholder:text-neutral-800 rounded-md"
           value={value}
           autoFocus
-          onChange={(e) => {
-            setValue(e.target.value);
-            router.push(`/search/${e.target.value}`);
-          }}
+          onChange={handleChange}
         />
       </div>
       <h2 className="mt-4 text-neutral-100 font-semibold">Browse all</h2>
