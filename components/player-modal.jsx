@@ -19,7 +19,7 @@ import { useImageColor } from "@/hooks/use-image-color";
 export const PlayerModal = ({ isOpen, setIsOpen }) => {
   const { currentSong, songs, index } = useSelector((state) => state.song);
 
-  const color = useImageColor(currentSong?.image);
+  const color = useImageColor(currentSong?.image || "/default-cover.jpg");
 
   const {
     isPlaying,
@@ -51,7 +51,10 @@ export const PlayerModal = ({ isOpen, setIsOpen }) => {
           <Sheet.Scroller className="p-4 mx-auto w-full">
             <div className="w-full mt-12">
               <Image
-                src={currentSong?.image?.replace("150x150", "500x500")}
+                src={
+                  currentSong?.image?.replace("150x150", "500x500") ||
+                  "/default-cover.jpg"
+                }
                 alt={`${currentSong?.title} poster`}
                 width={300}
                 height={300}

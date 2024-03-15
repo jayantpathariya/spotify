@@ -18,19 +18,19 @@ export const MobilePlayer = () => {
   const { currentSong } = useSelector((state) => state.song);
 
   const color = useImageColor(currentSong?.image);
-  const bgColor = color ? `${color}E6` : "#000";
-  const getTextColor = (color) => {
-    const r = parseInt(color.slice(1, 3), 16);
-    const g = parseInt(color.slice(3, 5), 16);
-    const b = parseInt(color.slice(5, 7), 16);
-    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-    return brightness > 125 ? "#000" : "#fff";
+  let bgColor = "#000";
+
+  const generateBgColor = (color) => {
+    if (color !== "transparent") {
+      bgColor = `${color}E6`;
+    }
+
+    return bgColor;
   };
 
-  const textColor = getTextColor(color);
-  const subtitleColor = textColor === "#000" ? "#666" : "#999";
-
   const { isPlaying, seek, duration, handleTogglePlay } = usePlayer();
+
+  console.log("color", color);
 
   return (
     <div
@@ -38,13 +38,13 @@ export const MobilePlayer = () => {
         "sticky bottom-[10.2%] left-0 right-0 rounded-md p-2 flex items-center justify-between gap-x-2 m-2 lg:hidden"
       )}
       style={{
-        backgroundColor: bgColor,
+        backgroundColor: generateBgColor(color),
       }}
       onClick={() => setIsOpen(true)}
     >
       <div className="flex items-center gap-x-2">
         <Image
-          src={currentSong?.image}
+          src={currentSong?.image || "/default-cover.jpg"}
           alt={`${currentSong?.title} poster`}
           width={50}
           height={50}
@@ -56,17 +56,11 @@ export const MobilePlayer = () => {
             dangerouslySetInnerHTML={{
               __html: currentSong?.title,
             }}
-            style={{
-              color: textColor,
-            }}
           />
           <p
             className="text-xs line-clamp-1"
             dangerouslySetInnerHTML={{
               __html: currentSong?.subtitle,
-            }}
-            style={{
-              color: subtitleColor,
             }}
           />
         </div>

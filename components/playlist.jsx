@@ -4,7 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 
 import { PlaylistCard } from "./playlist-card";
 
-export const Playlist = ({ title, playlist, source }) => {
+export const Playlist = ({ title, playlist }) => {
   const [emblaRef] = useEmblaCarousel({
     slidesToScroll: "auto",
     containScroll: "trimSnaps",
@@ -24,7 +24,9 @@ export const Playlist = ({ title, playlist, source }) => {
                 <PlaylistCard
                   title={item.title}
                   subtitle={item.subtitle}
-                  images={item.images}
+                  images={
+                    item?.images?.length ? item?.images[2]?.link : item.image
+                  }
                   type={item.type}
                   link={item.link}
                 />

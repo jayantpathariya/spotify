@@ -2,23 +2,23 @@ import Image from "next/image";
 
 import { PlayButton } from "./play-button";
 
-export const TopResultCard = () => {
+export const TopResultCard = ({ title, image, subtitle, type }) => {
   return (
     <div className="bg-neutral-900 p-4 rounded-md hover:bg-neutral-800/80 cursor-pointer relative group transition duration-300">
       <Image
-        src="/playlist.jpg"
-        alt="song poster"
+        src={image}
+        alt={`${title} image`}
         width={90}
         height={90}
         className="w-24 rounded-md"
       />
       <div className="mt-2">
         <p className="text-neutral-100 text-3xl font-bold mt-4 line-clamp-1">
-          Kesariya
+          {title}
         </p>
         <p className="text-sm text-neutral-200 line-clamp-1">
-          <span className="text-neutral-400 mt-2">Song • </span>
-          Pritam, Arijit Singh, Amitabh Bhattacharya
+          <span className="text-neutral-400 mt-2 capitalize">{type} </span>
+          {subtitle && " • "} {subtitle}
         </p>
       </div>
       <PlayButton

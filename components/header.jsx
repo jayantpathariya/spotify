@@ -2,17 +2,34 @@
 
 import Image from "next/image";
 
+import { useEffect, useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
 import { usePathname, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+import { useDebounce } from "@/hooks/use-debounce";
 
 export const Header = ({ scrolled, color }) => {
+  const [value, setValue] = useState("");
   const bgColor = color ? `bg-[${color}]` : "bg-orange-800/30";
+
+  const debouncedValue = useDebounce(value);
 
   const pathname = usePathname();
   const router = useRouter();
+
+  const handleSearch = (e) => {
+    setValue(e.target.value);
+  };
+
+  useEffect(() => {
+    if (debouncedValue) {
+      router.push(`/search/${debouncedValue}`);
+    } else {
+      router.push("/search");
+    }
+  }, [debouncedValue, router]);
 
   return (
     <header
@@ -47,6 +64,8 @@ export const Header = ({ scrolled, color }) => {
             type="text"
             placeholder="What do you want to listen to?"
             className="bg-neutral-800 py-3 px-4 rounded-full pl-8 w-full placeholder:text-neutral-500 text-neutral-200 text-sm"
+            value={value}
+            onChange={handleSearch}
           />
         </div>
       </div>

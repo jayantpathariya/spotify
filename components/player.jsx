@@ -57,7 +57,7 @@ export const Player = () => {
       <div className="flex items-center gap-x-4 w-1/6">
         <div className="flex items-center gap-x-4">
           <Image
-            src={currentSong?.image}
+            src={currentSong?.image || "/default-cover.jpg"}
             width={50}
             height={50}
             alt="song poster"

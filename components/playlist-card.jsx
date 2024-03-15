@@ -11,7 +11,7 @@ export const PlaylistCard = ({ title, images, type, link }) => {
     >
       <div className="relative">
         <Image
-          src={images[2].link}
+          src={images}
           width={180}
           height={180}
           alt={`${title} playlist cover`}

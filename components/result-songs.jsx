@@ -3,13 +3,13 @@ import { FiHeart } from "react-icons/fi";
 import { PiDotsThreeBold } from "react-icons/pi";
 import { RiPlayFill } from "react-icons/ri";
 
-export const ResultSongs = () => {
+export const ResultSongs = ({ playlist }) => {
   return (
     <div className="flex flex-col">
-      {Array.from({ length: 3 }).map((_, i) => (
+      {playlist.map((song) => (
         <div
           className="flex items-center gap-x-2 justify-between hover:bg-neutral-200/10 p-2 rounded-md group"
-          key={i}
+          key={song.id}
         >
           <div className="flex items-center gap-x-2">
             <div className="relative">
@@ -17,20 +17,22 @@ export const ResultSongs = () => {
                 <RiPlayFill className="text-3xl" />
               </div>
               <Image
-                src="/playlist.jpg"
-                alt="song poster"
+                src={song.image}
+                alt={`${song.title} image`}
                 width={42}
                 height={42}
                 className="w-12 rounded-md"
               />
             </div>
             <div>
-              <p className="text-neutral-100 line-clamp-1">
-                Kesariya (from &quot;Brahmastra&quot;)
-              </p>
-              <p className="line-clamp-1 text-sm">
-                Pritam, Arijit Singh, Amitabh Bhattacharya
-              </p>
+              <p
+                className="text-neutral-100 line-clamp-1"
+                dangerouslySetInnerHTML={{ __html: song.title }}
+              />
+              <p
+                className="line-clamp-1 text-sm"
+                dangerouslySetInnerHTML={{ __html: song.subtitle }}
+              />
             </div>
           </div>
           <div className="flex items-center gap-x-4">
