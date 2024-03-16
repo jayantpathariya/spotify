@@ -20,8 +20,12 @@ const UserSchema = new Schema({
     },
     profile_picture: {
       type: String,
-      default: "/default-profile-picture.jpg",
+      default: "https://api.dicebear.com/7.x/adventurer/svg?seed=Nala",
     },
+  },
+  playlists: {
+    type: [Schema.Types.ObjectId],
+    ref: "Playlist",
   },
 });
 
