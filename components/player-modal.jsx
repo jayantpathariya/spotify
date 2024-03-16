@@ -53,8 +53,8 @@ export const PlayerModal = ({ isOpen, setIsOpen }) => {
               <PiDotsThreeOutlineFill className="text-xl text-neutral-200" />
             </button>
           </Sheet.Header>
-          <Sheet.Scroller className="p-4 mx-auto w-full">
-            <div className="w-full mt-12">
+          <Sheet.Scroller className="p-4  w-full pb-6 pt-0">
+            <div className="w-full mt-5">
               <Image
                 src={
                   currentSong?.image?.replace("150x150", "500x500") ||
@@ -67,7 +67,7 @@ export const PlayerModal = ({ isOpen, setIsOpen }) => {
               />
             </div>
             <div>
-              <div className="flex items-center justify-between mt-10">
+              <div className="flex items-center justify-between mt-4">
                 <div>
                   <h1
                     className="text-2xl font-extrabold text-neutral-200 mt-4 line-clamp-1"
@@ -86,7 +86,7 @@ export const PlayerModal = ({ isOpen, setIsOpen }) => {
                   <FiHeart className="text-2xl text-neutral-300" />
                 </button>
               </div>
-              <div className="mt-8">
+              <div className="mt-4">
                 <div>
                   <ModalSeekBar
                     value={seek}

@@ -48,7 +48,7 @@ const PlaylistPage = async ({ params }) => {
           </p>
         </div>
       </div>
-      <div className="md:mt-6 bg-gradient-to-b from-[#514d70]/40 to-[20rem] md:p-4">
+      <div className="md:mt-6 lg:bg-gradient-to-b from-[#514d70]/40 to-[20rem] md:p-4">
         <div className="hidden md:flex gap-x-6 items-center">
           <PlayButton size="lg" />
           <button>

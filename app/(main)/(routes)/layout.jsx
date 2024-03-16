@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 
 const SiteLayout = ({ children }) => {
   const [scrollY, setScrollY] = useState(0);
-  const [bgColor, setBgColor] = useState("bg-orange-800/30");
 
   const scrollYRef = useRef(null);
 
@@ -32,7 +31,6 @@ const SiteLayout = ({ children }) => {
   }, []);
 
   const color = useImageColor("/playlist.jpg");
-  const bg = color ? `from-[${color}]` : "from-orange-800/30";
 
   return (
     <Box className="h-full p-0 overflow-y-scroll" ref={scrollYRef}>
