@@ -2,6 +2,7 @@
 
 import Sheet from "react-modal-sheet";
 import Image from "next/image";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
@@ -10,14 +11,18 @@ import { LuShuffle, LuRepeat } from "react-icons/lu";
 import { GiNextButton, GiPreviousButton } from "react-icons/gi";
 import { RiPlayFill } from "react-icons/ri";
 import { MdOutlinePause } from "react-icons/md";
+import { useSession } from "next-auth/react";
+import { useCallback, useEffect } from "react";
+import { toast } from "sonner";
 
 import { ModalSeekBar } from "./modal-seekbar";
 import { usePlayer } from "@/hooks/use-player";
 import { cn } from "@/lib/utils";
 import { useImageColor } from "@/hooks/use-image-color";
 
-export const PlayerModal = ({ isOpen, setIsOpen }) => {
+export const PlayerModal = ({ isOpen, setIsOpen, isLiked, setIsLiked }) => {
   const { currentSong, songs, index } = useSelector((state) => state.song);
+  const { data: session } = useSession();
 
   const color = useImageColor(currentSong?.image || "/default-cover.jpg");
 
@@ -36,6 +41,37 @@ export const PlayerModal = ({ isOpen, setIsOpen }) => {
     e.stopPropagation();
     setIsOpen(false);
   };
+
+  const handleLike = async (e) => {
+    e.stopPropagation();
+
+    if (session) {
+      const res = await axios.patch(`/api/songs/${currentSong?.id}`, {
+        ...currentSong,
+        action: "like",
+        isLiked: isLiked ? false : true,
+      });
+      if (res.status === 200) {
+        getIsSongLiked();
+        toast.success(`Song ${isLiked ? "unliked" : "liked"}`);
+      } else {
+        toast.error("Something went wrong");
+      }
+    } else {
+      toast.error("You need to login to like a song");
+    }
+  };
+
+  const getIsSongLiked = useCallback(async () => {
+    if (session && currentSong?.id) {
+      const response = await axios(`/api/songs/${currentSong?.id}/is-liked`);
+      setIsLiked(response.data.isLiked);
+    }
+  }, [currentSong?.id, session, setIsLiked]);
+
+  useEffect(() => {
+    getIsSongLiked();
+  }, [getIsSongLiked]);
 
   return (
     <Sheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
@@ -82,8 +118,13 @@ export const PlayerModal = ({ isOpen, setIsOpen }) => {
                     }}
                   />
                 </div>
-                <button>
-                  <FiHeart className="text-2xl text-neutral-300" />
+                <button onClick={handleLike}>
+                  <FiHeart
+                    className={cn(
+                      "text-2xl text-neutral-300",
+                      isLiked && "text-red-500 fill-red-500"
+                    )}
+                  />
                 </button>
               </div>
               <div className="mt-4">

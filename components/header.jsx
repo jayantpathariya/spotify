@@ -17,7 +17,7 @@ export const Header = ({ scrolled, color }) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const query = pathname?.split("/")[2]
     ? pathname?.split("/")[2]?.replaceAll("%20", " ")
@@ -29,6 +29,65 @@ export const Header = ({ scrolled, color }) => {
   const handleSearch = (e) => {
     setValue(e.target.value);
     router.push(`/search/${e.target.value}`);
+  };
+
+  const renderAuth = () => {
+    if (status === "loading") {
+      return (
+        <div className="flex items-center gap-x-4">
+          <div className="w-10 h-10 bg-neutral-900 rounded-full animate-pulse" />
+        </div>
+      );
+    } else if (session) {
+      return (
+        <div className="relative">
+          <button
+            className="p-1 bg-neutral-900 rounded-full"
+            onClick={() => setShowMenu((prev) => !prev)}
+            onBlur={() => {
+              setTimeout(() => {
+                setShowMenu(false);
+              }, 200);
+            }}
+          >
+            <Image
+              src="/profile-image.jpg"
+              width={26}
+              height={26}
+              alt="profile image"
+              className="rounded-full h-7 w-7"
+            />
+          </button>
+          {showMenu && (
+            <div className="absolute -bottom-10 right-0 bg-neutral-800 px-4 py-2 rounded-md w-24">
+              <button
+                className="text-neutral-200 font-semibold"
+                onClick={signOut}
+              >
+                Sign out
+              </button>
+            </div>
+          )}
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex items-center gap-x-2">
+          <Link
+            href="/signup"
+            className="px-4 py-2 font-bold hover:scale-105 hover:text-neutral-200 transition-transform"
+          >
+            Sign up
+          </Link>
+          <Link
+            href="/login"
+            className="px-4 py-2 bg-neutral-200 text-neutral-700 rounded-full font-bold hover:scale-105 transition-transform"
+          >
+            Login
+          </Link>
+        </div>
+      );
+    }
   };
 
   return (
@@ -69,52 +128,7 @@ export const Header = ({ scrolled, color }) => {
           />
         </div>
       </div>
-      {session ? (
-        <div className="relative">
-          <button
-            className="p-1 bg-neutral-900 rounded-full"
-            onClick={() => setShowMenu((prev) => !prev)}
-            onBlur={() => {
-              setTimeout(() => {
-                setShowMenu(false);
-              }, 200);
-            }}
-          >
-            <Image
-              src={session.user.profile_picture}
-              width={26}
-              height={26}
-              alt="profile image"
-              className="rounded-full h-7 w-7"
-            />
-          </button>
-          {showMenu && (
-            <div className="absolute -bottom-10 right-0 bg-neutral-800 px-4 py-2 rounded-md w-24">
-              <button
-                className="text-neutral-200 font-semibold"
-                onClick={signOut}
-              >
-                Sign out
-              </button>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="flex items-center gap-x-2">
-          <Link
-            href="/signup"
-            className="px-4 py-2 font-bold hover:scale-105 hover:text-neutral-200 transition-transform"
-          >
-            Sign up
-          </Link>
-          <Link
-            href="/login"
-            className="px-4 py-2 bg-neutral-200 text-neutral-700 rounded-full font-bold hover:scale-105 transition-transform"
-          >
-            Login
-          </Link>
-        </div>
-      )}
+      {renderAuth()}
     </header>
   );
 };

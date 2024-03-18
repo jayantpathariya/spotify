@@ -16,8 +16,6 @@ export const PlaylistCard = ({ title, images, subtitle, type, link }) => {
       const result = await axios(`/api/playlist/${type}/${link}`);
       const data = result.data;
 
-      console.log("data", data);
-
       dispatch(
         setSong({
           song: data.list[0],

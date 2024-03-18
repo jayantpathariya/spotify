@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FiHeart } from "react-icons/fi";
 import { LuShuffle, LuRepeat } from "react-icons/lu";
@@ -16,6 +17,8 @@ import {
 } from "react-icons/rx";
 import { HiOutlineQueueList } from "react-icons/hi2";
 import { useSelector } from "react-redux";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 import { SeekBar } from "./seek-bar";
 import { cn } from "@/lib/utils";
@@ -23,6 +26,7 @@ import { usePlayer } from "@/hooks/use-player";
 
 export const Player = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isSongLiked, setIsSongLiked] = useState(false);
   const {
     isPlaying,
     seek,
@@ -39,6 +43,7 @@ export const Player = () => {
 
   const router = useRouter();
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   const { currentSong } = useSelector((state) => state.song);
 
@@ -51,6 +56,37 @@ export const Player = () => {
       setIsFullscreen(false);
     }
   };
+
+  const handleLike = async () => {
+    if (session) {
+      const res = await axios.patch(`/api/songs/${currentSong?.id}`, {
+        ...currentSong,
+        action: "like",
+        isLiked: isSongLiked ? false : true,
+      });
+      if (res.status === 200) {
+        getIsSongLiked();
+        toast.success(`Song ${isSongLiked ? "unliked" : "liked"}`);
+      } else {
+        toast.error("Something went wrong");
+      }
+    } else {
+      toast.error("You need to login to like a song");
+    }
+  };
+
+  const getIsSongLiked = useCallback(async () => {
+    if (session && currentSong?.id) {
+      const response = await axios(`/api/songs/${currentSong?.id}/is-liked`);
+      setIsSongLiked(response.data.isLiked);
+    }
+  }, [currentSong?.id, session]);
+
+  useEffect(() => {
+    getIsSongLiked();
+  }, [getIsSongLiked]);
+
+  console.log(isSongLiked, currentSong?.id);
 
   return (
     <div className="w-full items-center justify-between hidden lg:flex">
@@ -78,8 +114,16 @@ export const Player = () => {
             />
           </div>
         </div>
-        <button className="hover:text-neutral-200 hover:scale-105 transition duration-200">
-          <FiHeart className="text-lg" />
+        <button
+          className="hover:text-neutral-200 hover:scale-105 transition duration-200"
+          onClick={handleLike}
+        >
+          <FiHeart
+            className={cn(
+              "text-lg",
+              isSongLiked && "text-red-500 fill-red-500"
+            )}
+          />
         </button>
       </div>
       <div className="flex flex-col items-center justify-center gap-y-1 w-[40%]">

@@ -13,7 +13,7 @@ const SongSchema = new Schema({
       },
     },
   ],
-  id: {
+  song_id: {
     type: String,
     required: true,
   },
@@ -27,7 +27,6 @@ const SongSchema = new Schema({
   },
   list: {
     type: String,
-    required: true,
   },
   more_info: {
     album: {
@@ -128,30 +127,30 @@ const SongSchema = new Schema({
       type: String,
       required: true,
     },
-    perma_url: {
-      type: String,
-      required: true,
-    },
-    play_count: {
-      type: Number,
-      required: true,
-    },
-    subtitle: {
-      type: String,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    type: {
-      type: String,
-      required: true,
-    },
-    year: {
-      type: String,
-      required: true,
-    },
+  },
+  perma_url: {
+    type: String,
+    required: true,
+  },
+  play_count: {
+    type: Number,
+    required: true,
+  },
+  subtitle: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  year: {
+    type: String,
+    required: true,
   },
 });
 

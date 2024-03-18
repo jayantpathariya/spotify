@@ -7,11 +7,6 @@ const PlaylistSchema = new Schema({
   },
   header_desc: {
     type: String,
-    required: true,
-  },
-  id: {
-    type: String,
-    required: true,
   },
   image: {
     type: String,
@@ -27,7 +22,6 @@ const PlaylistSchema = new Schema({
   },
   perma_url: {
     type: String,
-    required: true,
   },
   play_count: {
     type: String,
