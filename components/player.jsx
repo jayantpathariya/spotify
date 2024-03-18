@@ -86,8 +86,6 @@ export const Player = () => {
     getIsSongLiked();
   }, [getIsSongLiked]);
 
-  console.log(isSongLiked, currentSong?.id);
-
   return (
     <div className="w-full items-center justify-between hidden lg:flex">
       <div className="flex items-center gap-x-4 w-1/6">

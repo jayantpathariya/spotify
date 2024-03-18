@@ -40,80 +40,55 @@ const SongSchema = new Schema({
     artistMap: {
       artists: [
         {
-          id: {
-            type: String,
-            required: true,
-          },
           name: {
             type: String,
-            required: true,
           },
           image: {
             type: String,
-            required: true,
           },
           perma_url: {
             type: String,
-            required: true,
           },
           type: {
             type: String,
-            required: true,
           },
         },
       ],
       featured_artists: [
         {
-          id: {
-            type: String,
-            required: true,
-          },
           name: {
             type: String,
-            required: true,
           },
           image: {
             type: String,
-            required: true,
           },
           perma_url: {
             type: String,
-            required: true,
           },
           type: {
             type: String,
-            required: true,
           },
         },
       ],
       primary_artists: [
         {
-          id: {
-            type: String,
-            required: true,
-          },
           name: {
             type: String,
-            required: true,
           },
           image: {
             type: String,
-            required: true,
           },
           perma_url: {
             type: String,
-            required: true,
           },
           type: {
             type: String,
-            required: true,
           },
         },
       ],
     },
     duration: {
       type: Number,
-      required: true,
     },
     encrypted_drm_media_url: {
       type: String,

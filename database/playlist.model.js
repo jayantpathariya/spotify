@@ -1,6 +1,10 @@
 import { Schema, models, model } from "mongoose";
 
 const PlaylistSchema = new Schema({
+  playlist_id: {
+    type: String,
+    required: true,
+  },
   duration: {
     type: Number,
     required: true,
@@ -25,7 +29,6 @@ const PlaylistSchema = new Schema({
   },
   play_count: {
     type: String,
-    required: true,
   },
   subtitle: {
     type: String,
@@ -41,7 +44,6 @@ const PlaylistSchema = new Schema({
   },
   year: {
     type: String,
-    required: true,
   },
 });
 

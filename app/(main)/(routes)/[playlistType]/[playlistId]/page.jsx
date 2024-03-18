@@ -1,12 +1,10 @@
 import Image from "next/image";
-import { FiHeart } from "react-icons/fi";
-import { PiDotsThreeBold } from "react-icons/pi";
 
-import { PlayButton } from "@/components/play-button";
 import { Table } from "@/components/table";
 import { BackButton } from "@/components/back-button";
 import { getPlaylist } from "@/actions/get-playlist";
 import { formatArtists, formatDuration } from "@/lib/utils";
+import { TableHeader } from "@/components/table-header";
 
 const PlaylistPage = async ({ params }) => {
   const { playlistType, playlistId } = params;
@@ -49,15 +47,7 @@ const PlaylistPage = async ({ params }) => {
         </div>
       </div>
       <div className="md:mt-6 lg:bg-gradient-to-b from-[#514d70]/40 to-[20rem] md:p-4">
-        <div className="hidden md:flex gap-x-6 items-center">
-          <PlayButton size="lg" />
-          <button>
-            <FiHeart className="text-4xl" />
-          </button>
-          <button>
-            <PiDotsThreeBold className="text-4xl" />
-          </button>
-        </div>
+        <TableHeader playlist={result} />
         <div className="md:mt-6 md:p-2 pt-2">
           <Table playlist={result?.list} />
         </div>
