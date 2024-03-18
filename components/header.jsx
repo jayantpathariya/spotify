@@ -4,15 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
 import { usePathname, useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 
 export const Header = ({ scrolled, color }) => {
+  const [showMenu, setShowMenu] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+
+  const { data: session } = useSession();
 
   const query = pathname?.split("/")[2]
     ? pathname?.split("/")[2]?.replaceAll("%20", " ")
@@ -25,8 +30,6 @@ export const Header = ({ scrolled, color }) => {
     setValue(e.target.value);
     router.push(`/search/${e.target.value}`);
   };
-
-  const isAuth = false;
 
   return (
     <header
@@ -66,16 +69,36 @@ export const Header = ({ scrolled, color }) => {
           />
         </div>
       </div>
-      {isAuth ? (
-        <Link href="/login" className="p-1 bg-neutral-900 rounded-full">
-          <Image
-            src="/profile-image.jpg"
-            width={26}
-            height={26}
-            alt="profile image"
-            className="rounded-full h-7 w-7"
-          />
-        </Link>
+      {session ? (
+        <div className="relative">
+          <button
+            className="p-1 bg-neutral-900 rounded-full"
+            onClick={() => setShowMenu((prev) => !prev)}
+            onBlur={() => {
+              setTimeout(() => {
+                setShowMenu(false);
+              }, 200);
+            }}
+          >
+            <Image
+              src={session.user.profile_picture}
+              width={26}
+              height={26}
+              alt="profile image"
+              className="rounded-full h-7 w-7"
+            />
+          </button>
+          {showMenu && (
+            <div className="absolute -bottom-10 right-0 bg-neutral-800 px-4 py-2 rounded-md w-24">
+              <button
+                className="text-neutral-200 font-semibold"
+                onClick={signOut}
+              >
+                Sign out
+              </button>
+            </div>
+          )}
+        </div>
       ) : (
         <div className="flex items-center gap-x-2">
           <Link

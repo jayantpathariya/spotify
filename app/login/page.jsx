@@ -1,19 +1,77 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { useSession, signIn } from "next-auth/react";
+
+import { cn } from "@/lib/utils";
+import { useEffect } from "react";
+
+const schema = yup.object().shape({
+  email: yup.string().required("Email is required").email("Email is invalid"),
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(8, "Password is too short"),
+});
 
 const LoginPage = () => {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session) {
+      router.push("/");
+    }
+  }, [session, router]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async (data) => {
+    try {
+      const res = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
+
+      if (res.ok) {
+        toast.success("Login successful!");
+        router.push("/");
+      } else {
+        toast.error(res.error);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <div>
       <header className="pl-3">
-        <Image src="/logo.svg" alt="logo" width={150} height={150} />
+        <Link href="/">
+          <Image src="/logo.svg" alt="logo" width={150} height={150} />
+        </Link>
       </header>
       <main className="text-neutral-100 flex items-center justify-center">
         <div className="max-w-sm p-4">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-10">
             Login to start listening
           </h1>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-y-2 mb-6">
               <label htmlFor="email" className="font-bold">
                 Email address
@@ -22,8 +80,15 @@ const LoginPage = () => {
                 id="email"
                 type="email"
                 placeholder="name@domain.com"
-                className="bg-neutral-900 py-3 px-4 rounded-md text-neutral-100 border border-neutral-700 hover:border-neutral-200 outline-none focus:ring-1 ring-neutral-200"
+                className={cn(
+                  "bg-neutral-900 py-3 px-4 rounded-md text-neutral-100 border border-neutral-700 hover:border-neutral-200 outline-none focus:ring-1 ring-neutral-200",
+                  errors?.email?.message && "border-red-500"
+                )}
+                {...register("email", { required: true })}
               />
+              {errors?.email?.message && (
+                <p className="text-red-500">{errors.email.message}</p>
+              )}
             </div>
             <div className="flex flex-col gap-y-2 mb-6">
               <label htmlFor="password" className="font-bold">
@@ -33,11 +98,21 @@ const LoginPage = () => {
                 id="password"
                 type="password"
                 placeholder="*********"
-                className="bg-neutral-900 py-3 px-4 rounded-md text-neutral-100 border border-neutral-700 hover:border-neutral-200 outline-none focus:ring-1 ring-neutral-200"
+                className={cn(
+                  "bg-neutral-900 py-3 px-4 rounded-md text-neutral-100 border border-neutral-700 hover:border-neutral-200 outline-none focus:ring-1 ring-neutral-200",
+                  errors?.password?.message && "border-red-500"
+                )}
+                {...register("password", { required: true })}
               />
+              {errors?.password?.message && (
+                <p className="text-red-500">{errors.password.message}</p>
+              )}
             </div>
             <div className="flex flex-col gap-y-8">
-              <button className="text-neutral-950 bg-green-500 w-full py-3 px-4 rounded-full font-bold hover:bg-green-500/90">
+              <button
+                type="submit"
+                className="text-neutral-950 bg-green-500 w-full py-3 px-4 rounded-full font-bold hover:bg-green-500/90"
+              >
                 Login
               </button>
               <div className="flex items-center w-full gap-x-4">
@@ -45,7 +120,11 @@ const LoginPage = () => {
                 <span>or</span>
                 <span className="w-full inline-block bg-neutral-800 h-0.5" />
               </div>
-              <button className="text-neutral-250 py-3 px-4 rounded-full font-bold border border-neutral-800 flex items-center justify-center gap-x-4 hover:border-neutral-200 transition">
+              <button
+                type="button"
+                className="text-neutral-250 py-3 px-4 rounded-full font-bold border border-neutral-800 flex items-center justify-center gap-x-4 hover:border-neutral-200 transition"
+                onClick={() => signIn("google")}
+              >
                 <FcGoogle size={24} />
                 <span>Login with Google</span>
               </button>

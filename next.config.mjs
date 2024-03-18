@@ -30,6 +30,10 @@ const nextConfig = {
         protocol: "http",
         hostname: "c.sop.saavncdn.com",
       },
+      {
+        protocol: "https",
+        hostname: "api.dicebear.com",
+      },
     ],
   },
 };

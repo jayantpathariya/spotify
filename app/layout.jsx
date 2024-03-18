@@ -1,6 +1,8 @@
 import { Figtree } from "next/font/google";
+import { Toaster } from "sonner";
 
 import ReduxProvider from "@/providers/redux-provider";
+import SessionProvider from "@/providers/session-provider";
 
 import "./globals.css";
 
@@ -16,7 +18,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={font.className}>
-        <ReduxProvider>{children}</ReduxProvider>
+        <Toaster />
+        <SessionProvider>
+          <ReduxProvider>{children}</ReduxProvider>
+        </SessionProvider>
       </body>
     </html>
   );
